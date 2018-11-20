@@ -1,0 +1,3 @@
+[submodule "kbengine_typescript_plugin"]
+	path = assets/kbengine_typescript_plugin
+	url = https://github.com/imgamer/kbengine_typescript_plugin.git
