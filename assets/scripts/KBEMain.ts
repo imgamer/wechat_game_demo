@@ -8,12 +8,13 @@
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
-import KBEMain from "./KBEMain";
+import ClientApp from "../kbengine_typescript_plugin/ClientApp";
+import KBEDebug from "../kbengine_typescript_plugin/kbengine/KBEDebug"
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class TestMain extends cc.Component {
+export default class KBEMain extends ClientApp {
 
     @property(cc.Label)
     label: cc.Label = null;
@@ -21,24 +22,19 @@ export default class TestMain extends cc.Component {
     @property
     text: string = 'hello';
 
+    private static _instance: KBEMain = undefined;
+    static get instance()
+    {
+        return KBEMain._instance;
+    }
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        cc.game.addPersistRootNode(this.node);
+        super.onLoad();
+
+        KBEDebug.INFO_MSG("KBEMain::onLoad:do nothing.");
+        KBEMain._instance = this;
     }
 
-    start () {
-        console.info("TestMain::start.");
-    }
-
-    startKBE()
-    {
-        KBEMain.instance.run();
-    }
-
-    login()
-    {
-        this.startKBE();
-    }
     // update (dt) {}
 }

@@ -18,6 +18,9 @@
       },
       {
         "__id__": 28
+      },
+      {
+        "__id__": 31
       }
     ],
     "_active": true,
@@ -44,8 +47,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.5,
-      "y": 0.5,
+      "x": 0.734375,
+      "y": 0.734375,
       "z": 1
     },
     "_quat": {
@@ -79,7 +82,7 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 27
+        "__id__": 30
       }
     ],
     "_prefab": null,
@@ -1170,7 +1173,7 @@
     "_useOriginalSize": false,
     "_string": "登录",
     "_N$string": "登录",
-    "_fontSize": 40,
+    "_fontSize": 35,
     "_lineHeight": 50,
     "_enableWrapText": false,
     "_N$file": null,
@@ -1235,7 +1238,11 @@
     },
     "duration": 0.1,
     "zoomScale": 1.2,
-    "clickEvents": [],
+    "clickEvents": [
+      {
+        "__id__": 27
+      }
+    ],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
     "_N$normalColor": {
@@ -1276,21 +1283,13 @@
     "_id": "0a5DgQMGFPEYNufLqnEepo"
   },
   {
-    "__type__": "cc.Canvas",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 2
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 28
     },
-    "_enabled": true,
-    "_designResolution": {
-      "__type__": "cc.Size",
-      "width": 960,
-      "height": 640
-    },
-    "_fitWidth": false,
-    "_fitHeight": true,
-    "_id": "71neq169dAlKzSOcT3Z2ts"
+    "component": "TestMain",
+    "handler": "login",
+    "customEventData": ""
   },
   {
     "__type__": "cc.Node",
@@ -1354,7 +1353,7 @@
     "_id": "dfgZEIAiBHuoMmkaEN2IG6"
   },
   {
-    "__type__": "3d060vYkBlAIr+HxkFzSJ+g",
+    "__type__": "83662fSDZlDMbFIiUdrE6NB",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -1363,6 +1362,105 @@
     "_enabled": true,
     "label": null,
     "text": "hello",
-    "_id": "b2qFmQAihO2ZabBlTMULR3"
+    "_id": "44NrkO0UlHVY82NQqJ2a8g"
+  },
+  {
+    "__type__": "cc.Canvas",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "_designResolution": {
+      "__type__": "cc.Size",
+      "width": 960,
+      "height": 640
+    },
+    "_fitWidth": false,
+    "_fitHeight": true,
+    "_id": "71neq169dAlKzSOcT3Z2ts"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "KBEMain",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_active": true,
+    "_level": 1,
+    "_components": [
+      {
+        "__id__": 32
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_scale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_quat": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_zIndex": 0,
+    "groupIndex": 0,
+    "_id": "1eh9l4toxFFbrAU/XzJk/T"
+  },
+  {
+    "__type__": "8f9def0BW5A+ISVXdOTyeTJ",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 31
+    },
+    "_enabled": true,
+    "serverAddress": "127.0.0.1",
+    "port": 20013,
+    "useWss": false,
+    "wssBaseappPort": 443,
+    "updateTick": 100,
+    "isOnInitCallPropertysSetMethods": true,
+    "clientType": 5,
+    "userName": "test",
+    "password": "123456",
+    "label": null,
+    "text": "hello",
+    "_id": "3dl539e2lNxJCUCdE5ilAL"
   }
 ]
