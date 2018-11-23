@@ -30,6 +30,11 @@ export default class KBEMain extends ClientApp {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        if(KBEMain._instance != undefined)
+        {
+            this.destroy();
+        }
+
         super.onLoad();
 
         KBEDebug.INFO_MSG("KBEMain::onLoad:do nothing.");
