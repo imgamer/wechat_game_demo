@@ -42,26 +42,33 @@ export default class TestMain extends cc.Component {
     {
         this.startKBE();
 
-        WXFuncManager.instance.wxlogin( (errorcode, code) =>
-                                        {
-                                            // 调用接口失败
-                                            if(errorcode == 0)
-                                            {
-                                                KBEDebug.ERROR_MSG("wxlogin error:%s.", code);
-                                            }
-                                            else if(errorcode == 1)
-                                            {
-                                                KBEDebug.INFO_MSG("wxlogin failed:%s.微信登录失败。", code);
-                                            }
-                                            else if(errorcode == 2)
-                                            {
-                                                KBEDebug.INFO_MSG("wxlogin sucess:%s.微信登录成功。", code);
-                                            }
-                                            else
-                                            {}
-                                        }
-
+        let p = new Promise((resolved, rejected) =>
+                            {
+                                WXFuncManager.instance.wxlogin( (errorcode, code) =>
+                                                                {
+                                                                    // 调用接口失败
+                                                                    if(errorcode == 0)
+                                                                    {
+                                                                        KBEDebug.ERROR_MSG("wxlogin error:%s.", code);
+                                                                    }
+                                                                    else if(errorcode == 1)
+                                                                    {
+                                                                        KBEDebug.INFO_MSG("wxlogin failed:%s.微信登录失败。", code);
+                                                                    }
+                                                                    else if(errorcode == 2)
+                                                                    {
+                                                                        KBEDebug.INFO_MSG("wxlogin sucess:%s.微信登录成功。", code);
+                                                                        resolved(code);
+                                                                    }
+                                                                }
+                                );
+                            }
         );
+        p.then((code) =>
+        {
+            KBEDebug.INFO_MSG("wxlogin sucess:%s.微信登录成功，使用code申请登录。", code);
+        });
+
     }
     // update (dt) {}
 }
