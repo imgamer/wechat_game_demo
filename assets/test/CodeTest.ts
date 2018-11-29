@@ -1,18 +1,18 @@
 const {ccclass, property} = cc._decorator;
 import player = require("./Player");    // 导入js，但需要.d.ts
 
-import Entity from "../../kbengine_typescript_plugin/kbengine/Entity";   // 如果没有默认导出要加上{}，对应从模块对象中导出某个属性
-import KBEDebug from "../../kbengine_typescript_plugin/kbengine/KBEDebug";    // 默认导出KBEDebug
-import KBEEvent from "../../kbengine_typescript_plugin/kbengine/Event";
-import Message from "../../kbengine_typescript_plugin/kbengine/Message";
-import * as KBEEncoding from "../../kbengine_typescript_plugin/kbengine/KBEEncoding";
-import {KBEngineArgs, KBEngineApp} from "../../kbengine_typescript_plugin/kbengine/KBEngine";  // 没有默认导出，需要{}方式
+import Entity from "../kbengine_typescript_plugin/kbengine/Entity";   // 如果没有默认导出要加上{}，对应从模块对象中导出某个属性
+import KBEDebug from "../kbengine_typescript_plugin/kbengine/KBEDebug";    // 默认导出KBEDebug
+import KBEEvent from "../kbengine_typescript_plugin/kbengine/Event";
+import Message from "../kbengine_typescript_plugin/kbengine/Message";
+import * as KBEEncoding from "../kbengine_typescript_plugin/kbengine/KBEEncoding";
+import {KBEngineArgs, KBEngineApp} from "../kbengine_typescript_plugin/kbengine/KBEngine";  // 没有默认导出，需要{}方式
 
-import * as KBEMath from "../../kbengine_typescript_plugin/kbengine/KBEMath";
+import * as KBEMath from "../kbengine_typescript_plugin/kbengine/KBEMath";
 import AsyncModule from "./AsyncModule";
 
-import * as ExportEntity from "../../kbengine_typescript_plugin/entities/ExportEntity";
-import * as Datatypes from "../../kbengine_typescript_plugin/kbengine/DataTypes";
+import * as ExportEntity from "../kbengine_typescript_plugin/entities/ExportEntity";
+import * as Datatypes from "../kbengine_typescript_plugin/kbengine/DataTypes";
 
 import tsPlayer from "./tsPlayer";  // 默认导出
 
@@ -110,7 +110,7 @@ export default class CodeTest extends cc.Component {
     {
         // 在更新协议时根据entity名字动态import类型并注册到
         let path: string = "../../kbengine_typescript_plugin/entities/" + "DemoAccount"
-        const module  = await import("../../kbengine_typescript_plugin/entities/DemoAccount");    // 这样的import是异步行为，必须指定回调处理函数
+        const module  = await import("../kbengine_typescript_plugin/entities/DemoAccount");    // 这样的import是异步行为，必须指定回调处理函数
         let e = new module.default();
         return e;
     }
