@@ -50,8 +50,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.734375,
-      "y": 0.734375,
+      "x": 0.435275281648062,
+      "y": 0.435275281648062,
       "z": 1
     },
     "_quat": {
@@ -1290,7 +1290,7 @@
     "target": {
       "__id__": 28
     },
-    "component": "TestMain",
+    "component": "testMain",
     "handler": "login",
     "customEventData": ""
   },
@@ -1525,7 +1525,7 @@
     "_skewY": 0,
     "_zIndex": 0,
     "groupIndex": 0,
-    "_id": "3a+O+kHTlASIqUI/x/s7Y0"
+    "_id": "4c9Xp4s5tBOYBkf0it3TGd"
   },
   {
     "__type__": "62ef2ncsL5Es5zmGW8W0Jep",
@@ -1537,7 +1537,7 @@
     "_enabled": true,
     "label": null,
     "text": "hello",
-    "webServer": "www.fengine.top:8000/",
-    "_id": "43ZJgkctpINpdR3Kv7EBw3"
+    "webServer": "http://127.0.0.1:8000",
+    "_id": "3bL+QYE95E9I+k3RPQndtc"
   }
 ]
