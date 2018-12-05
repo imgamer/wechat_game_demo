@@ -27,6 +27,7 @@ export default class TestMain extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
 
     private wxcode: string = "";
+    private wxUserData: object = undefined;
 
     onLoad () {
         cc.game.addPersistRootNode(this.node);
@@ -86,7 +87,21 @@ export default class TestMain extends cc.Component {
             //调用成功
             if(res.statusCode == 200)
             {
+                KBEDebug.INFO_MSG("loginWebServerCB:result:%s, res.data:%s", res.data["result"], res.data);
+                if(res.data["result"] == "SUCCESS")
+                {
+                    let account = res.data["account"];
+                    let password = res.data["pwd"];
+                    // 获取到帐号密码unionid等数据,存储到本地
+                    WXFuncManager.instance.setStorageSync("account", account);
+                    WXFuncManager.instance.setStorageSync("password", password);
 
+                    KBEDebug.INFO_MSG("loginWebServerCB:login kbe, account:%s, password:%s", account, password);
+                    // 调用kbe登录接口
+                    let strUserData = JSON.stringify(this.wxUserData);
+                    WXFuncManager.instance.setStorageSync("strUserData", strUserData);
+                    //KBEMain.instance.Login(account, password, strUserData);  // kbe会使用utf8编码后发送给服务端，服务端应该utf8解码
+                }
             }
             else
             {
@@ -115,15 +130,15 @@ export default class TestMain extends cc.Component {
             {
                 if(this.wxcode != "")
                 {
-                    let tempdata:Object = {
+                    this.wxUserData = {
                         code: this.wxcode,
-                        rawData:info.rawData,
-                        signature:info.signature,
-                        encryptedData:info.encryptedData,
-                        iv:info.iv,
+                        rawData: info.rawData,
+                        signature: info.signature,
+                        encryptedData: info.encryptedData,
+                        iv: info.iv,
                     };
 
-                    this.loginWebServer(tempdata);
+                    this.loginWebServer(this.wxUserData);
                 }
             }
         }
