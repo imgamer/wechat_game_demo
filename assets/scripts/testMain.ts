@@ -25,6 +25,8 @@ export default class TestMain extends cc.Component {
     text: string = 'hello';
 
     // LIFE-CYCLE CALLBACKS:
+    @property
+    loginByWX: boolean = true;
 
     private wxcode: string = "";
     private wxUserData: object = undefined;
@@ -69,12 +71,12 @@ export default class TestMain extends cc.Component {
         }
     }
 
-    loginWebServer(userData)
+    loginWebServer()
     {
-        KBEDebug.INFO_MSG("loginWebServer, userData:%s.", userData);
+        KBEDebug.INFO_MSG("loginWebServer, this.wxUserData:%s.", this.wxUserData);
         let url = Config.instance.wxLoginURL();
         KBEDebug.INFO_MSG("wxloginCB: WXFuncManager.instance.httprequest url:%s.", url);
-        WXFuncManager.instance.httprequest(url, "GET", userData, this.loginWebServerCB.bind(this));
+        WXFuncManager.instance.httprequest(url, "GET", this.wxUserData, this.loginWebServerCB.bind(this));
     }
 
     loginWebServerCB(errcode, res)
@@ -90,8 +92,10 @@ export default class TestMain extends cc.Component {
                 KBEDebug.INFO_MSG("loginWebServerCB:result:%s, res.data:%s", res.data["result"], res.data);
                 if(res.data["result"] == "SUCCESS")
                 {
-                    let account = res.data["account"];
-                    let password = res.data["pwd"];
+                    // 必须要做类型转换，否则登录失败，服务器错误，猜测是传入any类型，插件并不能正确转换为string：
+                    // WebSocketPacketFilter::recv: pFragmentDatasRemain_ <= 0! addr=127.0.0.1:64917/0/0/0!
+                    let account = String(res.data["account"]);
+                    let password = String(res.data["pwd"]);
                     // 获取到帐号密码unionid等数据,存储到本地
                     WXFuncManager.instance.setStorageSync("account", account);
                     WXFuncManager.instance.setStorageSync("password", password);
@@ -100,13 +104,13 @@ export default class TestMain extends cc.Component {
                     // 调用kbe登录接口
                     let strUserData = JSON.stringify(this.wxUserData);
                     WXFuncManager.instance.setStorageSync("strUserData", strUserData);
-                    //KBEMain.instance.Login(account, password, strUserData);  // kbe会使用utf8编码后发送给服务端，服务端应该utf8解码
+                    KBEMain.instance.Login(account, password, strUserData);  // kbe会使用utf8编码后发送给服务端，服务端应该utf8解码
                 }
             }
             else
             {
                 // 提示网络原因登录失败
-                WXFuncManager.instance.showModal("提示","微信登录失败("+res.statusCode+")",false,"","确定",(clickinfo)=>{});
+                WXFuncManager.instance.showModal("提示", "微信登录失败("+ res.statusCode + ")", false, "", "确定", (clickinfo) => {});
             }
         }
     }
@@ -138,7 +142,7 @@ export default class TestMain extends cc.Component {
                         iv: info.iv,
                     };
 
-                    this.loginWebServer(this.wxUserData);
+                    this.loginWebServer();
                 }
             }
         }
@@ -175,15 +179,15 @@ export default class TestMain extends cc.Component {
                             //用户同意授权用户信息
                             WXFuncManager.instance.getUserInfo(
                                 (info) => {
-                                    let tempdata:Object = {
+                                    let tempdata: Object = {
                                         code: this.wxcode,
                                         rawData: info.rawData,
                                         signature: info.signature,
                                         encryptedData: info.encryptedData,
                                         iv: info.iv,
                                     };
-
-                                    this.loginWebServer(tempdata);
+                                    this.wxUserData = tempdata;
+                                    this.loginWebServer();
                                 }
                             )
                         }
@@ -196,7 +200,11 @@ export default class TestMain extends cc.Component {
     login()
     {
         this.startKBE();
-        this.wxlogin();
+        if(this.loginByWX)
+            this.wxlogin();
+        else
+            KBEMain.instance.Login();
+
         return;
         let p = new Promise((resolved, rejected) =>
                             {

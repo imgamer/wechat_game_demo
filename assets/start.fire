@@ -50,8 +50,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.435275281648062,
-      "y": 0.435275281648062,
+      "x": 0.5,
+      "y": 0.5,
       "z": 1
     },
     "_quat": {
@@ -1365,6 +1365,7 @@
     "_enabled": true,
     "label": null,
     "text": "hello",
+    "loginByWX": true,
     "_id": "44NrkO0UlHVY82NQqJ2a8g"
   },
   {
